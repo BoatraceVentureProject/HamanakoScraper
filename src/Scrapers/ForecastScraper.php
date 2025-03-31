@@ -59,9 +59,9 @@ class ForecastScraper extends BaseScraper
 
         $reporterYesterdayCommentLabel = '記者予想 前日コメント';
         $reporterYesterdayCourseLabel = '記者予想 前日コース';
+        $reporterYesterdayFocusLabel = '記者予想 前日フォーカス';
         $reporterYesterdayFocusExactaLabel = '記者予想 前日フォーカス 2連単';
         $reporterYesterdayFocusTrifectaLabel = '記者予想 前日フォーカス 3連単';
-        $reporterYesterdayFocusLabel = '記者予想 前日フォーカス';
 
         $reporterYesterdayComment = Normalizer::normalize($forecasts['.z_comment'][0]);
         $reporterYesterdayCourse = Normalizer::normalize($forecasts['.z_sinnyu > .sinnyu_zlist'][0], ['shouldRemoveAllSpaces' => true]);
@@ -74,13 +74,12 @@ class ForecastScraper extends BaseScraper
         }));
 
         $jlcYesterdayCourseLabel = 'JLC予想 前日コース';
-        $jlcYesterdayReliabilityLabel = 'JLC予想 前日信頼度';
         $jlcYesterdayFocusLabel = 'JLC予想 前日フォーカス';
         $jlcYesterdayFocusExactaLabel = 'JLC予想 前日フォーカス 2連単';
         $jlcYesterdayFocusTrifectaLabel = 'JLC予想 前日フォーカス 3連単';
+        $jlcYesterdayReliabilityLabel = 'JLC予想 前日信頼度';
 
         $jlcYesterdayCourse = Normalizer::normalize($forecasts['.j_sinnyu > .sinnyu_jlist'][0]);
-        $jlcYesterdayReliability = Normalizer::normalize($forecasts['.j_reliability'][0]);
         $jlcYesterdayFocus = Normalizer::normalize($forecasts['.j_focus > .focus_jlist > li']);
         $jlcYesterdayFocusExacta = array_values(array_filter($jlcYesterdayFocus, function ($focus) {
             return (substr_count($focus, '-') + substr_count($focus, '=')) === 1;
@@ -88,6 +87,7 @@ class ForecastScraper extends BaseScraper
         $jlcYesterdayFocusTrifecta = array_values(array_filter($jlcYesterdayFocus, function ($focus) {
             return (substr_count($focus, '-') + substr_count($focus, '=')) === 2;
         }));
+        $jlcYesterdayReliability = Normalizer::normalize($forecasts['.j_reliability'][0]);
 
         return [
             'reporter_yesterday_comment_label' => $reporterYesterdayCommentLabel,
