@@ -16,13 +16,13 @@ class CommentScraper extends BaseScraper implements CommentScraperInterface
 {
     /**
      * @param  string|int                           $raceNumber
-     * @param  \Carbon\CarbonInterface|string|null  $date
+     * @param  \Carbon\CarbonInterface|string|null  $raceDate
      * @return array
      */
-    public function scrape(string|int $raceNumber, CarbonInterface|string|null $date = null): array
+    public function scrape(string|int $raceNumber, CarbonInterface|string|null $raceDate = null): array
     {
-        $date = Carbon::parse($date ?? 'today')->format('Ymd');
-        $crawlerUrl = sprintf($this->baseUrl, 'group-yosou', $date, $raceNumber, '&kind=1');
+        $raceDate = Carbon::parse($raceDate ?? 'today')->format('Ymd');
+        $crawlerUrl = sprintf($this->baseUrl, 'group-yosou', $raceDate, $raceNumber, '&kind=1');
         $crawler = Scraper::getInstance()->request('GET', $crawlerUrl);
         $comments = Scraper::filterByKey($crawler, '.tbl_cyokuzen_comment > tbody > tr > td');
 
