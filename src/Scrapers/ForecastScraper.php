@@ -37,7 +37,7 @@ class ForecastScraper extends BaseScraper
     private function scrapeYesterday(string|int $raceNumber, CarbonInterface|string|null $raceDate = null): array
     {
         $raceDate = Carbon::parse($raceDate ?? 'today')->format('Ymd');
-        $crawlerUrl = sprintf($this->baseUrl, 'group-yosou', $raceDate, $raceNumber, '&kind=0');
+        $crawlerUrl = sprintf($this->baseUrl, 'yosou', $raceDate, $raceNumber, '&kind=0');
         $crawler = Scraper::getInstance()->request('GET', $crawlerUrl);
         $forecasts = Scraper::filterByKeys($crawler, [
             '.z_comment',
@@ -123,7 +123,7 @@ class ForecastScraper extends BaseScraper
     private function scrapeToday(string|int $raceNumber, CarbonInterface|string|null $raceDate = null): array
     {
         $raceDate = Carbon::parse($raceDate ?? 'today')->format('Ymd');
-        $crawlerUrl = sprintf($this->baseUrl, 'group-yosou', $raceDate, $raceNumber, '&kind=1');
+        $crawlerUrl = sprintf($this->baseUrl, 'yosou', $raceDate, $raceNumber, '&kind=1');
         $crawler = Scraper::getInstance()->request('GET', $crawlerUrl);
         $forecasts = Scraper::filterByKeys($crawler, [
             '.writer_txt',

@@ -14,7 +14,7 @@ abstract class BaseScraper implements BaseScraperInterface
     /**
      * @var string
      */
-    protected string $baseUrl = 'https://www.boatrace-hamanako.jp/modules/yosou/%s.php?day=%s&race=%d%s';
+    protected string $baseUrl = 'https://www.boatrace-hamanako.jp/modules/yosou/group-%s.php?day=%s&race=%d%s';
 
     /**
      * @param  string  $name

@@ -24,7 +24,7 @@ class TimeScraper extends BaseScraper implements TimeScraperInterface
     public function scrape(string|int $raceNumber, CarbonInterface|string|null $raceDate = null): array
     {
         $raceDate = Carbon::parse($raceDate ?? 'today')->format('Ymd');
-        $crawlerUrl = sprintf($this->baseUrl, 'group-cyokuzen', $raceDate, $raceNumber, '&kind=2');
+        $crawlerUrl = sprintf($this->baseUrl, 'cyokuzen', $raceDate, $raceNumber, '&kind=2');
         $crawler = Scraper::getInstance()->request('GET', $crawlerUrl);
         $times = Scraper::filterByKeys($crawler, [
             '.com-rname',
