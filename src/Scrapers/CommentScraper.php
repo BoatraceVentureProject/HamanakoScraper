@@ -15,14 +15,14 @@ use Carbon\CarbonInterface;
 class CommentScraper extends BaseScraper implements CommentScraperInterface
 {
     /**
-     * @param  string|int                           $raceCode
+     * @param  string|int                           $raceNumber
      * @param  \Carbon\CarbonInterface|string|null  $date
      * @return array
      */
-    public function scrape(string|int $raceCode, CarbonInterface|string|null $date = null): array
+    public function scrape(string|int $raceNumber, CarbonInterface|string|null $date = null): array
     {
         $date = Carbon::parse($date ?? 'today')->format('Ymd');
-        $crawlerUrl = sprintf($this->baseUrl, 'group-yosou', $date, $raceCode, '&kind=1');
+        $crawlerUrl = sprintf($this->baseUrl, 'group-yosou', $date, $raceNumber, '&kind=1');
         $crawler = Scraper::getInstance()->request('GET', $crawlerUrl);
         $comments = Scraper::filterByKey($crawler, '.tbl_cyokuzen_comment > tbody > tr > td');
 
